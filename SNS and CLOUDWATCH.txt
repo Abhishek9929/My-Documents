@@ -1,0 +1,36 @@
+-------------------
+CLOUD WATCH AND SNS
+--------------------
+cloud watch> Amazon CloudWatch monitors (AWS) resources and the applications. it helps to track matrics.
+SNS(simple notification service)- if we want to send notification for some thing we need to use SNS service.
+
+SNS set up steps:
+  > open the sns service 
+  > click on topics and create a topic 
+  > select standard and give a name tpo the topics
+  > go to the topic And create a subscription
+  > choose a protocol (ex : email,sms,)
+  > in the end-point place enter the email id of the person who will receive the mail.
+  > click on the create subcription and conformed the mail in your mail box to activate the service.
+
+  Cloud watch setup:
+    > create a new instance
+	> open cloudwatch resources and clik on the dashboard
+	> choose the widget style
+	> choose per-instance metrics (to moniter for a single instance)
+	> filter the instance by instance id and select CPU utilisation then click on the create widget
+	> choose alaram and create a alaram 
+	> select EC2 , Per-instance
+	>  filter the instance by instance id and select CPU utilisation 
+	> click opn select metric  and iun the condition section select static and the whenever(ex: greater, less, equall)
+    > send an alaram to (choose SNS topic from drop down)
+    > then chhose the suitable action and give alaram name and description
+    > create alaram
+----command---
+>  to know the details of the utilisation : top
+** stress command is use to increase the cpu utilisation
+ > sudo amazon-linux-extras install epel -y
+ > sudo yum install stress -y
+ > stress --cpu 1 --timeout 10000 &
+ 
+	

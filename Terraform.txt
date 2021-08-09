@@ -1,0 +1,27 @@
+--------------------------TERRAFORM-----------------------
+Download Terraform EXE from Google.uznip and run the unzip file in gitbash.
+Create a IAM user using programmatic Acess And attched Adminstration policy to the user.
+install aws CLI utility. https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2-windows.html
+aws configure --profile terraform
+Now provide Iam access key,id,region and output format.
+run aws s3 --profile terraform to check whether connnection with aws is sucessful or not.
+Make a directory IBM and cd ibm.
+Create a file main.tf inorder to configure the file the file extension should be (tf).
+ -input this into terraform file
+ # Configure the AWS Provider
+provider "aws" {
+  region  = "us-east-1"
+  profile = "terraform"
+}
+# provision VPC
+resource "aws_vpc" "IBM" {
+  cidr_block       = "10.0.0.0/16"
+  instance_tenancy = "default"
+
+  tags = {
+    Name = "IBM-vpc"
+  }
+}
+> to initiate terraform run the command- ~/downloads/terraform init
+> to run the terraform file run the command- ~/downloads/terraform apply
+> to run the terraform file run the command- ~/downloads/terraform destroy

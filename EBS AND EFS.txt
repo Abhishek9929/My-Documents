@@ -1,0 +1,133 @@
+EBS(Elastic block storage) AND EFS(Elastic file system)
+---------------------*---------------------------------
+EC2 instances support two types for block level storage
+Elastic Block Store - EBS (Persistent - Network attached drives)
+Instance Store ( Ephemeral/temporary store)
+
+Elastic BLOCK STORAGE:
+             -Persistant volume that means data can be shared or backed up
+	         - this is network atttach volume
+	         - this volume is aws recommmened volume
+instance storage :
+             -Not Persistant volume that means data can not be shared or backed up
+	         - physical attached storage
+	        - AWS does not recomend to use in instance.it can be used for testing
+--------------------------------------------------------			 
+Instance Store           Elastic Block Store
+----------------------------------------------------
+Local to Instance     |    Network Attached Storage
+Non-persistent storage|     Persistent Storage
+No Snapshot Support   |    Point in time Snapshot support
+
+Elastic block storage also classified into
+     -Root volume
+	       > Root volume is the primary storage
+		   > Any instance you want to lunch root volume is must
+		   > Your AMI(OS) is insatalled on Root Volume
+           > You can have only one root Volume for an instance
+	 -Additional volume
+	       > Apart from root Volume, you can have Additional Volumes attached to your instance, like "D" drive
+           > Additional Volumes are OPTIONAL
+		   > You can have multiple Additional Volumes for an instance
+> Volume Types :
+     > SSD - Best performance, types
+	 > HDD - Typical hard drives
+	 > Previous Generation - Not looking for performance, less cost
+
+> Rules :
+     > An Volume is locked to an Availability Zone
+	   Ex : I have an instance provisioned in "1A" Availability Zone, and my Volume is provisioned in "1B" Availability Zone, then you can never attach Volume 			to the instance 	
+     > A Volume can only be attached to One Instance at a time i.e You can't share a Volume across multiple instances at the same time  
+	          > NOTE : Expection for Nitro Instances
+> Backups 
+    	> EBS Volumes can be backed up into SNAPSHOTS	
+		> Using SNAPSHOTS
+		    > We can Share the data across instances, which are in different Availability Zones
+			> We can Share the ata across instances, which are in different REGIONS
+			> We can backup data, for disaster recovery
+        > SNAPSHOTS are in-active data, meaning you cannot attach SNAPSHOTS to your instances
+		> If you want to reterive the data, you should create a new Volume from the SNAPSHOT, then attch to instances
+		> SNAPSHOT are very cheap in price, as they are stored in S3, but we cannot see it in S3
+		> NOTE : S3 is a maanged service by aws, so we get out of the box High Availability & Fault Tolerance
+		
+EBS LAB(Additional volume attached to instace ):
+-------
+Lunch an instance with ebs ROOT Volume
+Create a new volume in the same region as the instance beacause we can't add the ebs volume present in the other region to the instance.
+-To know about the storage attach to a volume use the command in cli > lsblk
+to know about the storage details in the instace label use > df -h
+attach the volume to the instace by clicking the action tab the attch volume--chooce the instace 
+                                                                            -- choose the folder /dev/xvdf
+In order to make new file format- sudo mkfs -t ext4 /dev/xvdf
+To make a directory in the root- sudo mkdir /add-data
+To attach additional storage and transfer add-data file to instance lavel--sudo mount /dev/xvdf /add-data/
+To make file in side the add-data folder: cd /add-data/
+To remove additional storage from the instance : sudo umount /dev/xvdf and detached from GUI also 
+To transfer additional data from one zone to other zone
+          - Umount and detanced volume from the instance 
+		  - take a snap shot of that additionalo volume.
+		  - from snapshot action buttom create a volume, there we need to chhosed the same zone as per the instance zone
+To transfer same data from one region to anopther region
+         - Got to the snapshot then from action buttom copy the snapshopt to the required region. then createa new volume and attach to to the instace in the new region
+-----------------------------------
+EFS(ELASTIC FILE SYSTEM)
+----------------------------------
+> We can share the same EFS Storage to multiple instances
+
+	> We Can attach the EFS Storage to an instance, which is located in a different Availability Zone
+
+	> EFS Storage Scalable upto PB's
+
+	> EFS is dynamic, we don't need to select any size, EFS automatically Scales Up and Down, as we add and remove the files
+
+	> EFS is fully managed by AWS
+
+	> EFS cannot be used as ROOT Volume, can only be ADDITIONAL DATA
+
+	> EFS is highly priced
+
+	> Unlike EBS, when we use EFS, it needs NFS protocol to work
+
+		> NFS port - 2049
+
+		> NOTE : NFS port is not for instances, it's for EFS storage
+EFS LAB(Elastic file system attach to instance ):
+Create a efs storage in the across zone from the efs resources
+-when you attach that efs,it will provide a link
+- attch the security group(port-2049) to efs file by clicking in the network tab.
+- inorder to attach the volume go the git bash then run the command given by AWS console.
+------------------------------------------------------------------------
+S3(simple storage services)
+------------------------------------------------------------------------
+
+
+		 
+		  
+
+		
+		
+				
+
+	
+	
+		
+
+		
+
+			
+
+			
+
+			
+
+
+		
+		
+
+		
+
+		
+
+		
+
+			

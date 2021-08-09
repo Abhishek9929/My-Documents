@@ -1,0 +1,29 @@
+---------------------
+DATABASES AND LAB
+-------------------
+instance a lunch and add security group 22,8080,3306
+login to the instances
+sudo yum -y install git java-1.8* maven mysql
+Download Tomcat using wget https://archive.apache.org/dist/tomcat/tomcat-7/v7.0.94/bin/apache-tomcat-7.0.94.tar.gz
+Extract Tomcat- tar xvf apache-tomcat-7.0.94.tar.gz
+cd apache-tomcat-7.0.94	
+start the tomcat - ~/apache-tomcat-7.0.94/bin/startup.sh
+git clone -b and link
+cd aws/rds/java(chnage the directory to the fetch code)
+convert the code the executable code- mvn package
+cp /home/ec2-user/aws-rds/java/target/loginwebapp.war ~/apache-tomcat-7.0.94/webapp/
+download the mysql software - wget http://repo.mysql.com/mysql-community-release-el7-5.noarch.rpm
+sudo rpm -ivh _____mysql file name(for instll of sql)
+sudo yum -y install mysql-server(install mysql server)
+sudo systemctl start mysqld
+sudo mysql_secure installation(setup data base credential)
+click enter and type y
+enter password and retype password
+type y for all the asked permission
+mysql -u root -p (for login into mysql database)
+create database jwt
+create table
+update the credential in user registation and login.js page 
+mvn package
+cp target/loginwebapp.war ~/apache-tomcat-7.0.94/webapp/
+again login to the sql to show result

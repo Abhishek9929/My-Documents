@@ -1,0 +1,13 @@
+> Ansible is a radically simple IT automation and configuration platform that makes your applications easier to deploy. 
+-------Install Ansible------------
+sudo yum -y install epel-release	
+sudo yum -y install ansible
+> Default inventory file is /etc/ansible/hosts
+> The following command will query the inventory file
+             > ansible --list-hosts all
+> custom inventory
+             > ansible -i aws.ini --list-hosts all
+> syntax to keep ip address in custom inventory file
+             > ip address ansible_ssh_private_key_file=/home/centos/revi.pem ansible_user=centos
+> to get the connection conformation with the master node
+             > ansible -i aws.ini -m ping all 

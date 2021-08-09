@@ -1,0 +1,43 @@
+----------------------
+ELASTIC LOAD BALANCER/HIGH AVAILABILITY
+---------------------
+> Create a vpc and subnet with two different zone
+> lunch two instance in different zones
+> Create a load balancer
+           > choose classic load balancer
+		   > Give a name and choose the required VPC
+		   > choose the subnet 
+		   > select the Security group
+		   > configure health check(5,10,2,5)
+		   > Add instances and assign name to the load balancer
+		   > using dns address you can acess to the both the instance
+		   > to check the ELB is working make a change in the code level(index.html(spring to summer) and stop one of the http service
+----------------------------------
+FAULT AUTOSCALING/FAULT TOLERANCE
+---------------------------------
+- Click on lunch configuration and auto scaling
+- click on lunch configuratiin and provide name
+- give the AMI ID and choose instance type(t2micro)
+- provide user data
+- provide security pair and key
+- click on lunch configuration
+auto scaling step:
+   > give auto scaling name
+   > select lunch configuratiin
+   > choose vpc and subnet 
+   > select no load balancer
+   > give group size (2,2,10)
+   > add sns topics and tag
+   > click on auto scaling
+
+> create a load balancer and add it to the auto scaling group(select autosclaing group > edit > load balancer > select load balancer > update)
+
+AUTOSCALING : select auto scaling group and click on the auto scaling tab
+            > click on create dynamic policy
+			> select scaling type and give name (step sclaing and give name)
+			> create a cloud watch for both up and down 
+			> then execute(select policy > action and execute)
+			
+			
+
+

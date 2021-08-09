@@ -1,0 +1,81 @@
+search for get.docker.com
+install docker : curl -fsSL https://get.docker.com -o get-docker.sh and then sh get-docker.sh
+for start and enable docker : sudo systemctl start docker
+                            : sudo systemctl enable docker
+ in order to add docker into the permissive group(to give permission to the docker )
+        - sudo usermod -aG docker centos
+in-order to apply the above command we need to exit and re-login to the instance
+to show available image : docker image ls
+to show available container : docker container ls(for running container) and docker container ls -a (for all container)
+to pull an image: docker pull httpd(enter the name of the image in place of httpd)
+to run a container : docker container run -dt --name web httpd
+besically container run in to mode : 1- interactive mode(-it) (This means you can execute commands inside the container while it is still running)
+                                   : 2- detached mode(-dt)(means that a Docker container runs in the background of your terminal)
+to show details of a container : docker container inspect web
+to find the list of a container: docker exec web ls
+to know the present working directory :  docker exec web pwd
+to remove a container forcefully : docker container rm web -f (Enter the name of the container name in place of web )
+to remove a image : docker image rm hello-world -f (Enter the name of the image name in place of hello-world)
+________________
+PORT FORWARDING 
+ ______________      
+In Docker, the containers themselves can have applications running on ports. When you run a container, if you want to access the application in the container via a port number, you need to map the port number of the container to the port number of the Docker host 
+command for port forwarding : docker container run -dt --name web -p 8080:80 httpd
+to login in to the container : docker exec -it web bash
+index.html file is stored in the path : /usr/local/apache2/htdocs
+volume: 1- anonymous volume
+        2- Name volume
+		3: host volume
+to create a volume : docker run container -dt --name c2 -v /data ubuntu
+
+to deply a website using code mapping to a container : docker container run -dt --name web -v /home/centos/ecomm : /user/local/apache2/htdocs/ -p 8080:80 httpd
+ -------------------------------------
+ HOW TO CREATE OWN IMAGE AND CONTAINER
+ -----------------------------------
+ change directory to where code is present : cd ecomm
+ create a file in the ecomm directory : vim dockerfile
+ insert the below text to dockerfile : 
+ # select base image
+ FROM httpd
+# upload app code
+ copy . /usr/local/apache2/htdocs
+ 
+ to create a new image : docker build -t biju022/myapp .
+to creaatea new container using own image : docker container run -dt --name web -p 9090:80 biju022/myapp
+
+git login
+id-
+password-
+git push image name
+------------------------------
+Docker compose and installation
+-----------------------------
+Compose is a tool for defining and running multi-container Docker applications. With Compose, you use a YAML file to configure your application's services. Then, with a single command, you create and start all the services from your configuration. ... yml so they can be run together in an isolated environment.
+
+command for installation : sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+                         : sudo chmod +x /usr/local/bin/docker-compose
+                         : sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
+						 : docker-compose --version
+to run docker compose file : docker-compose up -d
+step to create compose and run :
+  1- create a my-app file directory
+  2- cd my-app
+  3- vim docker-compose.yml
+  4- insert into docker-compose.yml file
+  
+  version: "3.9"  # optional since v1.27.0
+services:
+  app1:
+    image: httpd
+    ports:
+      - "9090:80"
+  app2:
+    image: biju022/myapp
+    ports:
+       - "8080:80"
+  5- save and exit 
+  6-run the command docker-compose up -data
+  
+to see run container inside the compose file : docker-compose ps
+to stop a container inside the compose : docker-compose stop app1.
+to remove all container : docker-compose down

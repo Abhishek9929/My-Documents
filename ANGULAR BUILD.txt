@@ -1,0 +1,15 @@
+For Creating a environment to buil a node js applicatio.
+> https://angular.io/guide/setup-local
+> click on this > Angular requires an active LTS or maintenance LTS version of Node.js.
+                      > download >Installing Node.js via package manager
+					  > click CentOS, Fedora and Red Hat Enterprise Linux >  binary distributions maintained and supported by NodeSource
+					  > click on 
+					           >Enterprise Linux based distributions (rpm)
+                                               > Installation instructions
+							   > curl -fsSL https://rpm.nodesource.com/setup_14.x | sudo bash -
+							   > sudo yum -y install nodejs
+							   > node -v
+							   > npm -v
+					  > for angular installation > npm install -g @angular/cli
+					  > npm install
+					  > 
